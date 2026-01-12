@@ -1,0 +1,43 @@
+name: Build ThaiSon Luxury
+
+on:
+  workflow_dispatch: # Cho phép bấm nút chạy thủ công
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Xcode 15
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: '15.2'
+
+      - name: Install ldid
+        run: brew install ldid
+
+      - name: Build App (No Sign)
+        run: |
+          xcodebuild -scheme Feather \
+            -destination 'generic/platform=iOS' \
+            -configuration Release \
+            clean archive \
+            -archivePath build/Xsign.xcarchive \
+            CODE_SIGN_IDENTITY="" \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_ENTITLEMENTS="" \
+            CODE_SIGNING_ALLOWED=NO
+
+      - name: Package IPA
+        run: |
+          mkdir Payload
+          cp -r build/Xsign.xcarchive/Products/Applications/Feather.app Payload/ThaiSoniOS.app
+          zip -r ThaiSon_Luxury.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: ThaiSon_Luxury_App
+          path: ThaiSon_Luxury.ipa
