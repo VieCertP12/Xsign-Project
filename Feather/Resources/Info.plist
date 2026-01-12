@@ -11,7 +11,7 @@
 		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>feather_extension</string>
-			<key>CFBundleTypeName</key>
+			<key>ThaiSoniOS</key>
 			<string>iOS Package Archive</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
@@ -25,7 +25,7 @@
 		<dict>
 			<key>CFBundleTypeIconFile</key>
 			<string>feather_extension</string>
-			<key>CFBundleTypeName</key>
+			<key>ThaiSoniOS</key>
 			<string>AirDrop friendly iOS app</string>
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
